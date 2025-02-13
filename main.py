@@ -44,12 +44,12 @@ def main():
     while True:
         if ligar_microfone:
             with mic as fonte:
-                r.adjust_for_ambient_noise(fonte)
+                r.adjust_for_ambient_noise(fonte) # Ajustar de acordo com o ambiente
                 print('Fale algo ou diga(desligar)')
-                audio = r.listen(fonte)
+                audio = r.listen(fonte) # Ouvir a fala
                 print('Reconhecendo')
             try:
-                texto = r.recognize_google(audio, language='pt-BR')
+                texto = r.recognize_google(audio, language='pt-BR') # Trsnsformar apartir do google
                 if texto:
                     print(f'Você disse: {texto}')
             except Exception as e:
@@ -59,12 +59,12 @@ def main():
         else:
             texto = input("Escreva sua mensagem (ou #sair): ")
 
-            
+
         if texto.lower() == "desligar":  # Condição para encerrar o programa se o texto for 'desligar'
             break  # Sai do loop while se 'desligar' for digitado
 
         response = chat.send_message(texto)  # Envia a mensagem para o modelo de IA e recebe uma resposta
-        print("Gemini:", response.text, "\n")  # Exibe a resposta do modelo
+        print("Tati:", response.text, "\n")  # Exibe a resposta do modelo
 
         if falar:  # Verifica se a opção de falar está habilitada
             text_to_speak = response.text.replace('#', '').replace('*', '')  # Remove '#' e '*' da resposta
